@@ -39,14 +39,14 @@ Sign in
 Request
 ```sh
 # username and password 可以自行輸入不同字串
-curl -X POST -H "Content-Type:application/json" -d '{"username":"$username","passwd":"$password"}' http://localhost:8080/api/v1/signup
+curl -X POST -H "Content-Type:application/json" -d '{"username":"$username","passwd":"$password"}' http://localhost:8080/api/v1/signin
 ```
 Response
 ```sh
 # if exists
 Welcome, $username
 
-#if not exists
+#if not exists or wrong password
 user not exist or wrong password
 ```
 
