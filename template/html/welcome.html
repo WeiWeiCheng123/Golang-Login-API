@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Welcome {{ .name }}</title>
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"/>
+  <link href="assets/css/custom.css" type="text/css" rel="stylesheet"/>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+    <form action="/welcome" method="post">
+        <div class="banner">
+          <div class="banner_content">
+              <div class="banner_text">
+                  Welcome!!   {{ .name }}
+              </div>
+              <input type="submit" class="banner_btn button1" value="Sign out" name="btn"/>
+          </div>
+        </div>
+    </form>
+  <div>
+      <h2>
+          This website used Golang its module gin and database to create a login system
+      </h2>
+      <h2>
+          To use this website, please click Sign in or Sign up
+      </h2>
+  </div>
+</body>
+
+</html>
