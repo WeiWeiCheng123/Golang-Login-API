@@ -21,3 +21,7 @@ func CheckUserIsAccept(username string) error {
 	}
 	return nil
 }
+
+func Compare(hash_password string, password string) error {
+	return bcrypt.CompareHashAndPassword([]byte(hash_password), []byte(password))
+}

@@ -2,7 +2,6 @@ package handler
 
 import (
 	"errors"
-	"fmt"
 
 	"net/http"
 
@@ -11,7 +10,6 @@ import (
 	"github.com/WeiWeiCheng123/Golang-Login_system/model"
 	"github.com/gin-gonic/gin"
 	"github.com/go-xorm/xorm"
-	"golang.org/x/crypto/bcrypt"
 )
 
 var user struct {
@@ -31,7 +29,6 @@ func SingIn(c *gin.Context) {
 	user_tab := model.User{}
 	db := c.MustGet(constant.DB).(*xorm.Engine)
 	result, err := db.Where("username= ?", user.Username).Get(&user_tab)
-	fmt.Println("res= ", result, " ; err= ", err)
 	if err != nil {
 		c.Set(constant.StatusCode, http.StatusInternalServerError)
 		c.Set(constant.Error, err)
@@ -43,7 +40,7 @@ func SingIn(c *gin.Context) {
 		c.Set(constant.Error, errors.New("user not exist or wrong password"))
 		return
 	}
-	if err = bcrypt.CompareHashAndPassword([]byte(user_tab.Passwd), []byte(user.Password)); err != nil {
+	if err = function.Compare(user_tab.Passwd, user.Password); err != nil {
 		c.Set(constant.StatusCode, http.StatusUnauthorized)
 		c.Set(constant.Error, errors.New("user not exist or wrong password"))
 		return
