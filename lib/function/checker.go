@@ -14,7 +14,10 @@ func HashPassword(password string) (string, error) {
 
 func CheckUserIsAccept(username string) error {
 	if _, err := strconv.Atoi(username); err == nil {
-		return errors.New("must have at least one character")
+		return errors.New("must have at least one character and six words")
+	}
+	if len(username) < 6 {
+		return errors.New("must have at least one character and six words")
 	}
 	return nil
 }

@@ -9,6 +9,7 @@ import (
 	"github.com/WeiWeiCheng123/Golang-Login_system/lib/middleware"
 	"github.com/gin-gonic/gin"
 	"github.com/go-xorm/xorm"
+	_ "github.com/joho/godotenv/autoload"
 	_ "github.com/lib/pq"
 )
 
@@ -24,8 +25,8 @@ func init() {
 func engine() *gin.Engine {
 
 	server := gin.Default()
-	server.POST("/signin", middleware.Plain(), handler.SingIn)
-	server.POST("/signup", middleware.Plain(), handler.SignUp)
+	server.POST("/api/v1/signin", middleware.Plain(), handler.SingIn)
+	server.POST("/api/v1/signup", middleware.Plain(), handler.SignUp)
 
 	return server
 }

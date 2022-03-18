@@ -31,8 +31,3 @@ func Plain() gin.HandlerFunc {
 	}
 }
 
-func Auth() gin.HandlerFunc {
-	return func(c *gin.Context) {
-
-	}
-}

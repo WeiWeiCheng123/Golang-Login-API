@@ -2,6 +2,7 @@ package handler
 
 import (
 	"errors"
+	"fmt"
 
 	"net/http"
 
@@ -14,8 +15,8 @@ import (
 )
 
 var user struct {
-	username string
-	password string
+	Username string `json:"username"`
+	Password string `json:"passwd"`
 }
 
 func SingIn(c *gin.Context) {
@@ -29,7 +30,8 @@ func SingIn(c *gin.Context) {
 
 	user_tab := model.User{}
 	db := c.MustGet(constant.DB).(*xorm.Engine)
-	result, err := db.Where("username= ?", user.username).Get(&user_tab)
+	result, err := db.Where("username= ?", user.Username).Get(&user_tab)
+	fmt.Println("res= ", result, " ; err= ", err)
 	if err != nil {
 		c.Set(constant.StatusCode, http.StatusInternalServerError)
 		c.Set(constant.Error, err)
@@ -38,16 +40,16 @@ func SingIn(c *gin.Context) {
 
 	if result == false {
 		c.Set(constant.StatusCode, http.StatusUnauthorized)
-		c.Set(constant.Error, "user not exist or wrong password")
+		c.Set(constant.Error, errors.New("user not exist or wrong password"))
 		return
 	}
-	if err = bcrypt.CompareHashAndPassword([]byte(user_tab.Passwd), []byte(user.password)); err != nil {
+	if err = bcrypt.CompareHashAndPassword([]byte(user_tab.Passwd), []byte(user.Password)); err != nil {
 		c.Set(constant.StatusCode, http.StatusUnauthorized)
-		c.Set(constant.Error, "user not exist or wrong password")
+		c.Set(constant.Error, errors.New("user not exist or wrong password"))
 		return
 	}
 
-	out := "Welcome, " + user.username
+	out := "Welcome, " + user.Username
 	c.Set(constant.StatusCode, http.StatusOK)
 	c.Set(constant.Output, out)
 }
@@ -60,22 +62,22 @@ func SignUp(c *gin.Context) {
 		return
 	}
 
-	if err := function.CheckUserIsAccept(user.username); err != nil {
+	if err := function.CheckUserIsAccept(user.Username); err != nil {
 		c.Set(constant.StatusCode, http.StatusForbidden)
 		c.Set(constant.Error, err)
 		return
 	}
 
-	hashed_password, err := function.HashPassword(user.password)
+	hashed_password, err := function.HashPassword(user.Password)
 	if err != nil {
 		c.Set(constant.StatusCode, http.StatusInternalServerError)
 		c.Set(constant.Error, err)
 		return
 	}
 
-	q := `INSERT INTO user(username, password) VALUE($1,$2) WHERE NOT EXIST(SELECT 1 FROM user WHERE username = $1)`
+	q := `INSERT INTO user_table(username, passwd) SELECT ?,? WHERE NOT EXISTS (SELECT 1 FROM user_table WHERE username = ?)`
 	db := c.MustGet(constant.DB).(*xorm.Engine)
-	res, err := db.Exec(q, user.username, hashed_password)
+	res, err := db.Exec(q, user.Username, hashed_password, user.Username)
 	if err != nil {
 		c.Set(constant.StatusCode, http.StatusInternalServerError)
 		c.Set(constant.Error, err)
@@ -89,7 +91,7 @@ func SignUp(c *gin.Context) {
 		return
 	}
 
-	out := "User " + user.username + "created"
+	out := "User " + user.Username + " created"
 	c.Set(constant.StatusCode, http.StatusCreated)
 	c.Set(constant.Output, out)
 }
