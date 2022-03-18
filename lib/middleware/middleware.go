@@ -1,7 +1,7 @@
 package middleware
 
 import (
-	"github.com/WeiWeiCheng123/Golang-Login_system/lib/constant"
+	"github.com/WeiWeiCheng123/Golang-Login-API/lib/constant"
 	"github.com/gin-gonic/gin"
 	"github.com/go-xorm/xorm"
 )

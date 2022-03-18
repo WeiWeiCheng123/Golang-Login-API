@@ -3,10 +3,10 @@ package main
 import (
 	"fmt"
 
-	"github.com/WeiWeiCheng123/Golang-Login_system/handler"
+	"github.com/WeiWeiCheng123/Golang-Login-API/handler"
 
-	"github.com/WeiWeiCheng123/Golang-Login_system/lib/config"
-	"github.com/WeiWeiCheng123/Golang-Login_system/lib/middleware"
+	"github.com/WeiWeiCheng123/Golang-Login-API/lib/config"
+	"github.com/WeiWeiCheng123/Golang-Login-API/lib/middleware"
 	"github.com/gin-gonic/gin"
 	"github.com/go-xorm/xorm"
 	_ "github.com/joho/godotenv/autoload"

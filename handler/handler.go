@@ -5,9 +5,9 @@ import (
 
 	"net/http"
 
-	"github.com/WeiWeiCheng123/Golang-Login_system/lib/constant"
-	"github.com/WeiWeiCheng123/Golang-Login_system/lib/function"
-	"github.com/WeiWeiCheng123/Golang-Login_system/model"
+	"github.com/WeiWeiCheng123/Golang-Login-API/lib/constant"
+	"github.com/WeiWeiCheng123/Golang-Login-API/lib/function"
+	"github.com/WeiWeiCheng123/Golang-Login-API/model"
 	"github.com/gin-gonic/gin"
 	"github.com/go-xorm/xorm"
 )
