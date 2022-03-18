@@ -9,12 +9,12 @@ services:
       - ./docker-pg-init:/docker-entrypoint-initdb.d
     ports:
       - "5432:5432"
-  backend:
-    container_name: 'login-system'
-    image: 'my-login-system'
-    build: ./
-    ports:
-      - 8080:8080
-    restart: always
-    depends_on:
-      - mysql
+#  backend:
+#    container_name: 'login-system'
+#    image: 'my-login-system'
+#    build: ./
+#    ports:
+#      - 8080:8080
+#    restart: always
+#    depends_on:
+#      - mysql

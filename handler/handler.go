@@ -41,7 +41,7 @@ func SingIn(c *gin.Context) {
 		c.Set(constant.Error, "user not exist or wrong password")
 		return
 	}
-	if err = bcrypt.CompareHashAndPassword([]byte(user_tab.Password), []byte(user.password)); err != nil {
+	if err = bcrypt.CompareHashAndPassword([]byte(user_tab.Passwd), []byte(user.password)); err != nil {
 		c.Set(constant.StatusCode, http.StatusUnauthorized)
 		c.Set(constant.Error, "user not exist or wrong password")
 		return
