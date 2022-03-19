@@ -1,6 +1,8 @@
 package middleware
 
 import (
+	"fmt"
+
 	"github.com/WeiWeiCheng123/Golang-Login-API/lib/constant"
 	"github.com/gin-gonic/gin"
 	"github.com/go-xorm/xorm"
@@ -14,6 +16,7 @@ func Init(database *xorm.Engine) {
 
 func Plain() gin.HandlerFunc {
 	return func(c *gin.Context) {
+		fmt.Println(c.GetHeader("Authorization"))
 		c.Set(constant.DB, db)
 		c.Set(constant.StatusCode, nil)
 		c.Set(constant.Error, nil)
