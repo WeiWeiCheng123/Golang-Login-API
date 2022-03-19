@@ -16,7 +16,7 @@ func Init(database *xorm.Engine) {
 
 func Plain() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		fmt.Println(c.GetHeader("Authorization"))
+		fmt.Println("header= ",c.GetHeader("Authorization"))
 		c.Set(constant.DB, db)
 		c.Set(constant.StatusCode, nil)
 		c.Set(constant.Error, nil)

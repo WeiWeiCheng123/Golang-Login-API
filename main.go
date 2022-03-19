@@ -4,7 +4,6 @@ import (
 	"fmt"
 
 	"github.com/WeiWeiCheng123/Golang-Login-API/handler"
-
 	"github.com/WeiWeiCheng123/Golang-Login-API/lib/config"
 	"github.com/WeiWeiCheng123/Golang-Login-API/lib/middleware"
 	"github.com/gin-gonic/gin"
